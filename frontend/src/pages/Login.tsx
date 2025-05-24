@@ -7,7 +7,6 @@ import { setCredentials } from "../state/auth/authSlice";
 import { useLoginMutation } from "../state/auth/authApi";
 import { Toaster, toast } from "sonner";
 import { useState } from "react";
-import { jwtDecode } from "jwt-decode";
 
 type Inputs = {
   email: string;
@@ -40,11 +39,6 @@ const Login = () => {
         email: data.email,
         password: data.password,
       }).unwrap();
-
-      const decodedToken = jwtDecode(response.token);
-      
-      // Store token in localStorage
-      localStorage.setItem('token', response.token);
       
       // Dispatch the credentials to Redux store
       dispatch(setCredentials({
@@ -52,7 +46,7 @@ const Login = () => {
         token: response.token
       }));
 
-      if (decodedToken.sub === "tuyishimehope@gmail.com") {
+      if (response?.user?.role === "ADMIN") {
         toast.success("Welcome again!");
         navigate("/Admin");
       } else {

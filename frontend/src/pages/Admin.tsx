@@ -1,104 +1,93 @@
 import Sidebar from "../components/AdminSidebar";
 import "../styles/Admin.css";
-import bell from "../assets/Doorbell.png";
-import MyPicture from "../assets/A-removebg-preview.png"
-import Menu from "../assets/Menu.png";
 import PadLock from "../assets/Padlock.png";
 import ellips from "../assets/Ellipsis.png";
 import Email from "../assets/Email.png";
 import project from "../assets/Project.png";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom"
-import { logout } from "../state/auth/authSlice";
-import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 import AreaChartComponent from "../components/AreaChart";
 import { Toaster, toast } from "sonner";
+import AdminHeader from "../components/AdminHeader";
+import { useGetAllUsersQuery } from "../state/users/usersApi";
+import { useGetTweetsQuery } from "../state/tweets/tweetsApi";
+
 const Admin = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const dispatch = useDispatch();
-  const handleMenuOpen = () => {
-    console.log("clicked");
-    setMenuOpen(!menuOpen);
-    console.log(menuOpen);
-  };
+  const user = useSelector((state: any) => state.auth.user); // Assuming user data is in Redux state
+
+  // Fetch all users and tweets using RTK Query
+  const { data: allUsers = [], isLoading: isUsersLoading } = useGetAllUsersQuery();
+  const { data: allTweets = [], isLoading: isTweetsLoading } = useGetTweetsQuery();
+
   useEffect(() => {
-  toast.success("Welcome Again, Admin")
-}, [])
+    toast.success(`Welcome Again, ${user?.name || "Admin"}`);
+  }, [user]);
+
+  if (isUsersLoading || isTweetsLoading) {
+    return <p className="text-white">Loading...</p>;
+  }
+
   return (
     <div className="adminContainer">
       <Sidebar state={menuOpen} setState={setMenuOpen} />
       <Toaster position="top-right" richColors />
       <div className="mains">
-        <div className="headers">
-          <div className="info">
-            <p>tuyishimehope01@gmail.com</p>
-            <h3>Tuyishime Hope</h3>
-          </div>
-          <div className="user">
-            <img src={bell} alt="" />
-            <img src={MyPicture} alt="" className="img" />
-            <Link
-              className="logouts"
-              to={"/"}
-              onClick={() => dispatch(logout())}
-            >
-              Logout
-            </Link>
-            <div className="link menu" id="logout">
-              <button className="menu">
-                <img src={Menu} alt="" onClick={handleMenuOpen} />
-              </button>
-            </div>
-          </div>
-        </div>
+        <AdminHeader user={user} />
         <div className="cards">
+          {/* Endpoints Card */}
           <div className="card user">
             <div className="row1">
               <div>
-                <img src={PadLock} alt="" />
+                <img src={PadLock} alt="Endpoints" />
                 <p>Endpoints</p>
               </div>
               <div>
-                <img src={ellips} alt="" />
+                <img src={ellips} alt="Options" />
               </div>
             </div>
             <div className="row2">
               <p>25</p>
-              <a href="./UserPage.html">View All</a>
+              <Link to="/endpoints">View All</Link>
             </div>
           </div>
+
+          {/* Users Card */}
           <div className="card user">
             <div className="row1">
               <div>
-                <img src={Email} alt="" />
+                <img src={Email} alt="Users" />
                 <p>Users</p>
               </div>
               <div>
-                <img src={ellips} alt="" />
-              </div>
-            </div>
-            <div className="row2 ">
-              <p className="cEmail">12</p>
-              <a href="./EmailsPage.html">View All</a>
-            </div>
-          </div>
-          <div className="card user">
-            <div className="row1">
-              <div>
-                <img src={project} alt="" />
-                <p>Projects</p>
-              </div>
-              <div>
-                <img src={ellips} alt="" />
+                <img src={ellips} alt="Options" />
               </div>
             </div>
             <div className="row2">
-              <p>50</p>
-              <a href="./ProjectsPage.html">View All</a>
+              <p className="cEmail">{allUsers.length}</p>
+              <Link to="/Admin/Users">View All</Link>
+            </div>
+          </div>
+
+          {/* Tweets Card */}
+          <div className="card user">
+            <div className="row1">
+              <div>
+                <img src={project} alt="Tweets" />
+                <p>Tweets</p>
+              </div>
+              <div>
+                <img src={ellips} alt="Options" />
+              </div>
+            </div>
+            <div className="row2">
+              <p>{allTweets.length}</p>
+              <Link to="/tweets">View All</Link>
             </div>
           </div>
         </div>
-        {/* <div id="curve_chart" style={{ height: "65vh", width: "80vw" }}></div> */}
+
         <div className="mobile">
           <h2>Income</h2>
           <p>10,000,000 RWF</p>

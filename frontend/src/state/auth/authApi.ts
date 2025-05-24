@@ -33,6 +33,7 @@ interface ResetPasswordRequest {
 interface AuthResponse {
   token: string;
   user: {
+    role: string;
     id: string;
     email: string;
     firstname: string;
