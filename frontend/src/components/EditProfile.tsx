@@ -1,13 +1,12 @@
 import React, { ReactNode } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import gradient from "../assets/gradient.jpg";
 import url from "../utils/api-client";
 
 interface CommentProps {
   isOpen: boolean;
   onClose: () => void;
   children?: ReactNode;
-  dataId: number,
+  dataId: string,
   imageUrl:string
 }
 

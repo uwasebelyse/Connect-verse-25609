@@ -1,59 +1,37 @@
-import React, { useEffect, useState } from "react";
-import url from "../utils/api-client";
-import User from "../types/userType";
+import React from "react";
+import { useGetAllUsersQuery, useGetUserByEmailQuery } from "../state/users/usersApi";
+import { useSelector } from "react-redux";
+import { RootStateType } from "../state/types";
 import { jwtDecode } from "jwt-decode";
 
 const UserTable: React.FC = () => {
-    const [allUsers, setAllUsers] = useState<User[]>([]);
-    const [usersData,setUsersData ] = useState();
+  // Get the logged-in user's email from the token in the Redux state
+  const { token } = useSelector((state: RootStateType) => state.auth);
+  const decodedToken: any = token ? jwtDecode(token) : null;
+  const userEmail = decodedToken?.sub;
 
-  const handleFetchUsers = async () => {
-    const tokenData = localStorage.getItem("token-admin");
-    const response = await fetch(url + "/api/v1/user/all", {
-      method: "GET",
-      headers: {
-        Authorization: "Bearer " + (tokenData || ""),
-      },
-    });
-    const responseData = await response.json();
-    setAllUsers(responseData);
+  // Fetch all users using RTK Query
+  const { data: allUsers = [], isLoading: isUsersLoading, isError: isUsersError } = useGetAllUsersQuery();
+
+  // Fetch the logged-in user's data using RTK Query
+  const { isLoading: isUserDataLoading, isError: isUserDataError } = useGetUserByEmailQuery(
+    { email: userEmail },
+    { skip: !userEmail } // Skip query if email is not available
+  );
+
+  const handleFollow = async (userId: string) => {
+    console.log(`Follow user with ID: ${userId}`);
+    // Add follow logic here if needed
   };
 
-  useEffect(() => {
-      handleFetchUsers();
-       const fetchUsers = async () => {
-         const tokenDataa = localStorage.getItem("token-admin");
-         const tokenEmails = jwtDecode(tokenDataa);
-         const emailDatas = tokenEmails.sub;
-         const response = await fetch(url + "/api/v1/user/getuserbyemail", {
-           method: "POST",
-           headers: {
-             "Content-Type": "application/json",
-             Authorization: "Bearer " + tokenDataa || "",
-           },
-           body: JSON.stringify({ email: emailDatas }),
-         });
-         // const response = await fetch(url + "/api/v1/welcome")
-         const responseDataEmail = await response.json();
-         setUsersData(responseDataEmail);
-         console.log(responseDataEmail);
-      };
-      fetchUsers()
-  }, []);
+  if (isUsersLoading || isUserDataLoading) {
+    return <p className="text-white">Loading...</p>;
+  }
 
-  const handleFollow = async (userId: number) => {
-      console.log(`Follow user with ID: ${userId}`);
-        const tokenData = localStorage.getItem("token-admin");
-        const response = await fetch(url + "/api/v1/user/" + usersData?.id + "/follow/" + userId, {
-          method: "POST",
-          headers: {
-            Authorization: "Bearer " + (tokenData || ""),
-          },
-        });
-        const responseData = await response.json();
-        setAllUsers(responseData);
-  };
-console.log("UsersData", usersData)
+  if (isUsersError || isUserDataError) {
+    return <p className="text-red-500">Failed to load user data.</p>;
+  }
+
   return (
     <div className="w-full p-4">
       <table className="min-w-full bg-gray-800 text-white">
@@ -72,15 +50,15 @@ console.log("UsersData", usersData)
             <tr key={user.id}>
               <td className="py-2 px-4">
                 <img
-                  src={user.profile.profileImageUrl}
-                  alt={user.profile.username}
+                  src={user.profile?.profileImageUrl || "https://via.placeholder.com/40"}
+                  alt={user.profile?.username || "User"}
                   className="w-10 h-10 object-cover rounded-full"
                 />
               </td>
-              <td className="py-2 px-4">{user.profile.username}</td>
-              <td className="py-2 px-4">{user.profile.fullName}</td>
-              <td className="py-2 px-4">{user.profile.bio}</td>
-              <td className="py-2 px-4">{user.profile.location}</td>
+              <td className="py-2 px-4">{user.profile?.username || "N/A"}</td>
+              <td className="py-2 px-4">{user.profile?.fullName || "N/A"}</td>
+              <td className="py-2 px-4">{user.profile?.bio || "N/A"}</td>
+              <td className="py-2 px-4">{user.profile?.location || "N/A"}</td>
               <td className="py-2 px-4">
                 <button
                   onClick={() => handleFollow(user.id)}

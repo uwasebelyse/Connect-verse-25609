@@ -19,7 +19,7 @@ import {
   useUnlikeTweetMutation,
 } from "../state/tweets/tweetsApi";
 import { Toaster } from "sonner";
-import { useGetAllUsersQuery, usersApi } from '../state/users/usersApi';
+import { useGetAllUsersQuery } from '../state/users/usersApi';
 
 interface TweetProps {
   tweetId: number;

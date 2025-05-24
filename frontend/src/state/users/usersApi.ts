@@ -1,20 +1,25 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import url from '../../utils/api-client';
 import { RootStateType } from '../types';
+import { ReactNode } from 'react';
 
 interface User {
+  followingCount: number;
+  followersCount: number;
   role: ReactNode;
   id: string;
   email: string;
   firstname: string;
   lastname: string;
   username: string;
+  joinDate: string;
   profile?: {
     profileImageUrl: string;
     username: string;
     fullName: string;
     bio: string;
     location: string;
+    gender: string;
   };
 }
 

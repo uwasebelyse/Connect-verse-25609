@@ -1,6 +1,5 @@
-import React from 'react'
 import { Toaster } from 'sonner';
-import { News, Sidebar } from '../components';
+import { Sidebar } from '../components';
 import UserTable from '../components/UserTable';
 
 const UsersList = () => {

@@ -14,7 +14,7 @@ const EmailVerification = () => {
   const location = useLocation();
   const { register, handleSubmit } = useForm<VerificationInputs>();
   const [isLoading, setIsLoading] = useState(false);
-  const [email, setEmail] = useState(location.state?.email || "");
+  const email = location.state?.email || "";
   const [backendError, setBackendError] = useState<string>("");
 
   const onSubmit = async (data: VerificationInputs) => {

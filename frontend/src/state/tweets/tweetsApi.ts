@@ -82,7 +82,7 @@ export const tweetsApi = createApi({
     }),
     getComments: builder.query<Comment[], number>({
       query: (userId) => `/api/v1/tweet/user/comments/${userId}`,
-      providesTags: (result, error, tweetId) => [{ type: "Comment", id: tweetId }],
+      providesTags: (_, __, tweetId) => [{ type: "Comment", id: tweetId }],
     }),
     addComment: builder.mutation<Comment, { tweetId: number; content: string }>({
       query: ({ tweetId, content }) => ({
@@ -90,7 +90,7 @@ export const tweetsApi = createApi({
         method: "POST",
         body: { content },
       }),
-      invalidatesTags: (result, error, { tweetId }) => [{ type: "Comment", id: tweetId }],
+      invalidatesTags: (_, __, { tweetId }) => [{ type: "Comment", id: tweetId }],
     }),
   }),
 });
