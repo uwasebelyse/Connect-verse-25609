@@ -1,0 +1,224 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "outfit";
+}
+.containers {
+    width: 100%;
+    background-image: url('../assets/gradient.jpg');
+    background-repeat: no-repeat;
+    background-size:cover;
+    background-position:center;
+    min-height: 100vh;
+    padding: 1.2rem 5vw;
+    display: flex;
+    gap: 2rem;
+}
+
+.container-quote {
+    width: 50vw;
+    border-radius: 1.25rem;
+    border: 1px solid rgb(255,255,255,.6);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 2rem;
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+}
+
+.quote-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    height: 100%;
+}
+
+.quote-text {
+    color: rgb(255,255,255,.9);
+    font-size: 1.2rem;
+    line-height: 1.6;
+    font-style: italic;
+    padding: 1rem 0;
+    font-family: "outfit";
+}
+
+.quote-author {
+    color: rgb(255,255,255,.7);
+    font-size: 1rem;
+    text-align: right;
+    font-family: "outfit";
+}
+
+.quote-tips {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255,255,255,.2);
+}
+
+.quote-tips h2 {
+    color: white;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    font-family: "outfit";
+}
+
+.quote-tips ul {
+    list-style: none;
+    padding: 0;
+}
+
+.quote-tips li {
+    color: rgb(255,255,255,.8);
+    margin-bottom: 0.8rem;
+    padding-left: 1.5rem;
+    position: relative;
+    font-family: "outfit";
+}
+
+.quote-tips li:before {
+    content: "•";
+    color: #033AFF;
+    position: absolute;
+    left: 0;
+    font-size: 1.2rem;
+}
+
+.container-quote h1 {
+color: white;
+font-family: "outfit"
+}
+.container-quote p {
+color: rgb(255,255,255,.8);
+padding: 1rem 0;
+font-family: "outfit"
+}
+.container-register{
+    background-color: #FFFFFF;
+    width: 50vw;
+    border-radius: 1.25rem;
+    border: 1px solid rgb(255,255,255,.6);
+    padding: 2rem 4rem;
+}
+.container-register h1 {
+    color: #0E1227;
+    text-align: center;
+    padding: 1rem 0 1rem 0;
+    font-family: "outfit";
+    font-size: 2rem;
+}
+.container-register form{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 1.5rem;
+}
+.container-register .inputs{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+.inputs label {
+    font-size: 16px;
+    color: #12172A;
+    font-family: "outfit";
+    font-weight: 500;
+}
+.inputs input{
+    border-radius: .5rem;
+    padding: 0.75rem 1rem;
+    border: 1px solid rgb(212,216,232,.6);
+    outline: none;
+    color: #000;
+    background-color: rgb(212,216,232,.2);
+    transition: all 0.2s ease;
+}
+.inputs input:focus {
+    border-color: #033AFF;
+    background-color: rgb(212,216,232,.4);
+}
+.inputs input::placeholder {
+    font-family: "outfit";
+    color: #666;
+}
+.btns {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+.btns button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background-color: #000000;
+    color: white;
+    border-radius: .5rem;
+    padding: 1rem 0;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+.btns button:hover, .button:hover {
+    cursor: pointer;
+    background-color: #033AFF;
+    transform: translateY(-1px);
+}
+.container-register p {
+    text-align: center;
+    font-family: "outfit";
+    color: #666;
+}
+.button {
+    background-color: #000000;
+    border: none;
+    border-radius: .2rem;
+    padding: .85rem .25rem;
+    text-align: center;
+    color: white;
+    list-style:none;
+    text-decoration: none
+}
+.reg {
+    background: none;
+    color: #033AFF;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+.reg:hover {
+    color: #0026cc;
+}
+@media only screen and (max-width: 768px) {
+    .container {
+        padding: 1.2rem 6vw;
+        min-height: 100vh;
+    }
+    .container-quote {
+        display: none
+    }
+    .container-register {
+        width: 100vw;
+        padding: 2rem 3rem;
+    }
+}
+@media only screen and (max-width: 468px) {
+    .container {
+        padding: 1.2rem 3vw;
+        min-height: 100vh;
+    }
+    .container-quote {
+        display: none
+    }
+    .container-register {
+        width: 100vw;
+        padding: 1.5rem 2rem;
+    }
+    .container-register h1 {
+        font-size: 1.5rem;
+        padding: 0.5rem 0 1.5rem 0;
+    }
+    .inputs input {
+        padding: 0.6rem 0.8rem;
+    }
+}
