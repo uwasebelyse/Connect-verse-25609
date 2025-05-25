@@ -146,7 +146,7 @@ const username = users?.find((u) => u.id === tweetReview.userId)?.username || "U
           <p className="text-white text-[15px] leading-relaxed">{message}</p>
         </div>
         <div className="bottom">
-          <div className="icons flex justify-between max-w-[90%]">
+          <div className="icons flex gap-20 max-w-[90%]">
             <button
               className="group flex items-center gap-2 text-gray-400 hover:text-blue-400 transition-colors"
               onClick={handleComment}
@@ -177,7 +177,7 @@ const username = users?.find((u) => u.id === tweetReview.userId)?.username || "U
 
             <button className="group flex items-center gap-2 text-gray-400 hover:text-purple-400 transition-colors">
               <ChartBarIcon className="w-5 group-hover:scale-110 transition-transform" />
-              <span className="text-sm">1432</span>
+              <span className="text-sm">1</span>
             </button>
 
             <button className="group flex items-center gap-2 text-gray-400 hover:text-blue-400 transition-colors">

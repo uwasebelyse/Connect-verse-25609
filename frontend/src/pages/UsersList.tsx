@@ -1,5 +1,5 @@
 import { Toaster } from 'sonner';
-import { Sidebar } from '../components';
+import { News, Sidebar } from '../components';
 import UserTable from '../components/UserTable';
 
 const UsersList = () => {
@@ -7,13 +7,13 @@ const UsersList = () => {
     <div className="bg-[#0E1225] h-screen w-screen flex p-0 m-0">
       <Toaster position="top-right" richColors />
       <Sidebar />
-      <div className="main">
+      <div className="w-full">
               {/* <Tweets data={usersData} /> */}
               <UserTable/>
       </div>
-      {/* <div className="right">
+      <div className="right">
         <News />
-      </div> */}
+      </div>
     </div>
   );
 }

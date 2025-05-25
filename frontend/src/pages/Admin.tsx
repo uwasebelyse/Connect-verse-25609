@@ -4,11 +4,11 @@ import PadLock from "../assets/Padlock.png";
 import ellips from "../assets/Ellipsis.png";
 import Email from "../assets/Email.png";
 import project from "../assets/Project.png";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import AreaChartComponent from "../components/AreaChart";
-import { Toaster, toast } from "sonner";
+import { Toaster } from "sonner";
 import AdminHeader from "../components/AdminHeader";
 import { useGetAllUsersQuery } from "../state/users/usersApi";
 import { useGetTweetsQuery } from "../state/tweets/tweetsApi";
@@ -21,10 +21,6 @@ const Admin = () => {
   const { data: allUsers = [], isLoading: isUsersLoading } = useGetAllUsersQuery();
   const { data: allTweets = [], isLoading: isTweetsLoading } = useGetTweetsQuery();
 
-  useEffect(() => {
-    toast.success(`Welcome Again, ${user?.name || "Admin"}`);
-  }, [user]);
-
   if (isUsersLoading || isTweetsLoading) {
     return <p className="text-white">Loading...</p>;
   }
@@ -33,7 +29,7 @@ const Admin = () => {
     <div className="adminContainer">
       <Sidebar state={menuOpen} setState={setMenuOpen} />
       <Toaster position="top-right" richColors />
-      <div className="mains">
+      <div className="w-full">
         <AdminHeader user={user} />
         <div className="cards">
           {/* Endpoints Card */}

@@ -41,12 +41,13 @@ public class AuthenticationService {
     }
 
     private UserDto convertToUserDto(User user) {
+        
         return UserDto.builder()
                 .id(user.getId())
-                .email(user.getEmail())
+                .email(user.getUsername())
                 .firstname(user.getFirstname())
                 .lastname(user.getLastname())
-                .username(user.getUsername())
+                .username(user.getEmail())
                 .role(user.getRole())
                 .emailVerified(user.isEmailVerified())
                 .build();
@@ -64,6 +65,7 @@ public class AuthenticationService {
         var user = User.builder()
                 .firstname(request.getFirstname())
                 .lastname(request.getLastname())
+                .username(request.getUsername())
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(Role.USER)

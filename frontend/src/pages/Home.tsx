@@ -64,6 +64,8 @@ const Home = () => {
     );
   }
 
+  console.log("User data:", user);
+
   return (
     <div className="bg-[#0E1225] h-screen w-screen flex p-0 m-0">
       <Toaster position="top-right" richColors />

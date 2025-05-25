@@ -10,61 +10,66 @@ import { useDispatch } from "react-redux";
 import { logout } from "../state/auth/authSlice";
 
 const Sidebar = ({
-  state,
-  setState,
+    state,
+    setState,
 }: {
-  state: boolean;
-  setState: (value: boolean) => void;
+    state: boolean;
+    setState: (value: boolean) => void;
 }) => {
-  console.log(state);
-  const dispatch = useDispatch();
-  const handleClose = () => {
-    setState(!state);
-  };
-  return (
-    <div className={state ? "sidebar active" : "sidebar"}>
-      <div className="mobile-nav" style={{ display: state ? "flex" : "none" }}>
-        <img src={Multiply} alt="" onClick={handleClose} />
-      </div>
-      <div className="logo">
-        <img src={logo} alt="" />
-      </div>
-      <div className="links ">
-        <NavLink
-          to="/Admin"
-          className={({ isActive }) => (isActive ? "link active " : "link ")}
-        >
-          <img src={layout} alt="" />
-          <p>Dashboard</p>
-        </NavLink>
-        <NavLink
-          to="/Admin/Users"
-          className={({ isActive }) => (isActive ? "link active" : "link")}
-        >
-          <img src={member} alt="" />
-          <p>Users</p>
-        </NavLink>
+    const dispatch = useDispatch();
+    const handleClose = () => {
+        setState(!state);
+    };
 
-        <NavLink
-          to="/login"
-          className={({ isActive }) =>
-            isActive ? "link logout active" : "link logout"
-          }
-          onClick={() => dispatch(logout())}
-        >
-          <img src={logouts} alt="" />
-          <p>Logout</p>
-        </NavLink>
-      </div>
-      <div className="logger">
-        <img src={ctn} alt="" />
-        <p>
-          <span className=" px-4">0</span>Risk, all systems are <br></br>
-          operational
-        </p>
-      </div>
-    </div>
-  );
+    return (
+        <div className={state ? "sidebar active" : "sidebar"}>
+            {/* Mobile Close Button */}
+            <div className="mobile-nav" style={{ display: state ? "flex" : "none" }}>
+                <img src={Multiply} alt="Close" onClick={handleClose} />
+            </div>
+
+            {/* Logo Section */}
+            <div className="logo">
+                <img src={logo} alt="Logo" />
+            </div>
+
+            {/* Navigation Links */}
+            <div className="links">
+                <NavLink
+                    to="/Admin"
+                    end
+                    className={({ isActive }) => (isActive ? "link active" : "link")}
+                >
+                    <img src={layout} alt="Dashboard" />
+                    <p>Dashboard</p>
+                </NavLink>
+                <NavLink
+                    to="/Admin/Users"
+                    className={({ isActive }) => (isActive ? "link active" : "link")}
+                >
+                    <img src={member} alt="Users" />
+                    <p>Users</p>
+                </NavLink>
+                <NavLink
+                    to="/login"
+                    className={({ isActive }) => (isActive ? "link active logout" : "link logout")}
+                    onClick={() => dispatch(logout())}
+                >
+                    <img src={logouts} alt="Logout" />
+                    <p>Logout</p>
+                </NavLink>
+            </div>
+
+            {/* Status Section */}
+            <div className="logger">
+                <img src={ctn} alt="Status" />
+                <p>
+                    <span className="px-4">0</span>Risk, all systems are <br />
+                    operational
+                </p>
+            </div>
+        </div>
+    );
 };
 
 export default Sidebar;

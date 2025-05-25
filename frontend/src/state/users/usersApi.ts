@@ -35,7 +35,7 @@ export const usersApi = createApi({
       const state = getState() as RootStateType;
       const token = state.auth.token;
       if (token) {
-        headers.set('authorization', `Bearer ${token}`);
+        headers.set('Authorization', `Bearer ${token}`);
       }
       return headers;
     },
@@ -61,11 +61,32 @@ export const usersApi = createApi({
       }),
       invalidatesTags: ['User'],
     }),
+    getFollowers: builder.query<User[], string>({
+        query: (userId) => `/api/v1/follow/${userId}/followers`,
+        providesTags: ['User'],
+      }),
+    followUser: builder.mutation<void, { userId: string; targetUserId: string }>({
+      query: ({ userId, targetUserId }) => ({
+        url: `/api/v1/user/${userId}/follow/${targetUserId}`,
+        method: 'POST',
+      }),
+      invalidatesTags: ['User'],
+    }),
+    unfollowUser: builder.mutation<void, { userId: string; targetUserId: string }>({
+      query: ({ userId, targetUserId }) => ({
+        url: `/api/v1/user/${userId}/unfollow/${targetUserId}`,
+        method: 'POST',
+      }),
+      invalidatesTags: ['User'],
+    }),
   }),
 });
 
 export const {
   useGetAllUsersQuery,
   useGetUserByEmailQuery,
+  useGetFollowersQuery,
   useDeleteUserMutation,
-} = usersApi; 
+  useFollowUserMutation,
+  useUnfollowUserMutation,
+} = usersApi;

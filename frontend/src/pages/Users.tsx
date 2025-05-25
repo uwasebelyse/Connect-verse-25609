@@ -12,8 +12,8 @@ import { jwtDecode } from "jwt-decode";
 
 const Users = () => {
     const { user, isAuthenticated } = useSelector((state: RootStateType) => state.auth);
-    const { data: users, isLoading, error } = useGetAllUsersQuery();
-    const [deleteUser] = useDeleteUserMutation();
+    const { data: users, isLoading } = useGetAllUsersQuery();
+    const [ deleteUser]  = useDeleteUserMutation();
     const navigate = useNavigate();
 
     const [currentPage, setCurrentPage] = useState(1);
@@ -82,32 +82,28 @@ const Users = () => {
         return <div>Loading...</div>;
     }
 
-    if (error) {
-        return <div>Error loading users</div>;
-    }
-
     return (
         <div className="Container">
             <Toaster position="top-right" richColors />
             <Sidebar state={false} setState={() => {}} />
-            <div className="w-full p-4">
+            <div className="w-full">
                 <AdminHeader user={ user as any }/>
                 <h1 className="text-4xl font-bold text-white  mt-4 mb-4 text-center tracking-wide">User Management</h1>
-                <div className="flex justify-between items-center mb-4">
+                <div className="flex justify-between items-center mb-4 px-4">
                     <input
                         type="text"
                         placeholder="Search by name or email"
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
-                        className="p-2 border border-gray-300 rounded w-1/3"
+                        className="p-2 bg-gray-800 border border-gray-600 text-white placeholder-gray-400 rounded w-1/3 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
                 </div>
-                <div className="overflow-x-auto">
+                <div className="overflow-x-auto px-4">
                     <table className="min-w-full table-auto bg-gray-800 text-white rounded-lg shadow-lg">
                         <thead>
                             <tr className="bg-gray-700 text-gray-300">
                                 <th className="py-3 px-6 text-center">Profile Image</th>
-                                <th className="py-3 px-6 text-center">Username</th>
+                                <th className="py-3 px-6 text-center">Email Address</th>
                                 <th className="py-3 px-6 text-center">Full Name</th>
                                 <th className="py-3 px-6 text-center">Action</th>
                             </tr>
