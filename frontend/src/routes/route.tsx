@@ -1,5 +1,6 @@
 import App from "../App";
 import Admin from "../pages/Admin";
+import AdminProfilePage from "../pages/AdminProfile";
 import EmailVerification from "../pages/EmailVerification";
 import Error from "../pages/Error";
 import ForgotPassword from "../pages/ForgotPassword";
@@ -61,6 +62,10 @@ export const routes = [
   {
     path: "/Admin/Users",
     element: <Users />,
+  },
+  {
+    path: "/admin/profile",
+    element: <AdminProfilePage />,
   },
   // {
   //   path: "/Admin/",

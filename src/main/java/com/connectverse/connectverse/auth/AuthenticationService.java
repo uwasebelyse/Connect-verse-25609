@@ -122,7 +122,7 @@ public class AuthenticationService {
         repository.save(user);
         
         // Create reset link
-        String resetLink = "https://connect-verse-25609.onrender.com/reset-password?token=" + resetToken;
+        String resetLink = "http://localhost:5173/reset-password?token=" + resetToken;
         
         try {
             emailService.sendPasswordResetEmail(user.getUsername(), resetLink);

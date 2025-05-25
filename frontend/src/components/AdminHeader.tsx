@@ -62,7 +62,7 @@ const AdminHeader = ({ user }: Props) => {
                         <ul className="py-2">
                             <li
                                 className="px-4 py-2 hover:bg-gray-700 cursor-pointer text-white"
-                                onClick={() => navigate("/profile")}
+                                onClick={() => navigate("/admin/profile")}
                             >
                                 Profile
                             </li>
