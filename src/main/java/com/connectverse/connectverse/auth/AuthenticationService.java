@@ -76,7 +76,7 @@ public class AuthenticationService {
 
         // Send verification email
         try {
-            emailService.sendVerificationEmail(user.getEmail(), verificationCode);
+            emailService.sendVerificationEmail(user.getUsername(), verificationCode);
         } catch (Exception e) {
             throw new RuntimeException("Failed to send verification email");
         }
@@ -125,7 +125,7 @@ public class AuthenticationService {
         String resetLink = "https://connect-verse-25609.onrender.com/reset-password?token=" + resetToken;
         
         try {
-            emailService.sendPasswordResetEmail(user.getEmail(), resetLink);
+            emailService.sendPasswordResetEmail(user.getUsername(), resetLink);
         } catch (Exception e) {
             throw new RuntimeException("Failed to send reset email");
         }
@@ -158,6 +158,7 @@ public class AuthenticationService {
     }
 
     public void verifyEmail(EmailVerificationRequest request) {
+        System.out.println("Verifying email for: " + request.getEmail());
         var user = repository.findByEmail(request.getEmail())
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
