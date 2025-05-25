@@ -83,16 +83,16 @@ const Tweets = () => {
   }
 
   return (
-    <div className="">
+    <div>
       <Toaster position="top-right" richColors />
-      <div className="tweetcontainer mt-4 bg-[#D9D9D9] bg-opacity-10 rounded-md w-[58vw] p-2 px-4 mx-4">
+      <div className="tweetcontainer mt-4 bg-[#D9D9D9] bg-opacity-10 rounded-md w-[calc(100%-2rem)] p-2 px-4 mx-4">
         <div className="top flex gap-4 pb-6">
           <UserCircleIcon className="w-10 h-10 text-gray-400" />
           <textarea 
             value={tweetMessage}
             onChange={(e) => setTweetMessage(e.target.value)}
             placeholder="What is happening?"
-            className="bg-transparent outline-none text-white w-full resize-none h-20 overflow-y-auto"
+            className="bg-transparent outline-none  text-white w-full resize-none h-14 overflow-y-auto"
             disabled={isCreating}
             rows={3}
           />
@@ -113,7 +113,7 @@ const Tweets = () => {
           </button>
         </div>
       </div>
-      <div className="overflow-y-scroll h-[70vh] px-2 pt-6">
+      <div className="overflow-y-scroll h-[70vh] px-2 mx-2 pt-6">
         {tweetsData?.map((tweet) => (
           <Tweet 
             key={tweet.tweet_id}

@@ -1,19 +1,10 @@
 import {
   EllipsisHorizontalIcon,
-  MagnifyingGlassIcon,
 } from "@heroicons/react/24/solid";
 
 const News = () => {
   return (
-    <div className="border-l h-screen  p-2 w-[21vw]">
-      <div className="search bg-[#D9D9D9] p-2 gap-2 bg-opacity-10 flex rounded-full ">
-        <MagnifyingGlassIcon className="w-4 text-white" />
-        <input
-          type="text"
-          placeholder="search by username"
-          className=" bg-transparent outline-none text-white"
-        />
-      </div>
+    <div className="border-l border-gray-500 h-screen  p-2">
       <div className="subscribe text-white pt-4 px-2 ">
         <h2 className="font-bold text-xl">Get Verified</h2>
         <h4 className="py-4">Subscribe to unlock new Features</h4>

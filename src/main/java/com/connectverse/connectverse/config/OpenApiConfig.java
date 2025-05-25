@@ -14,9 +14,9 @@ import io.swagger.v3.oas.annotations.servers.Server;
 @OpenAPIDefinition(
         info = @Info(
                 contact = @Contact(
-                        name = "Hope",
-                        email = "tuyishimehope01@gmail.com",
-                        url = "https://mybrandvercel.vercel.app/"
+                        name = "Uwase Belyse",
+                        email = "uwasebelyse60@gmail.com",
+                        url = "https://uwasebelyse1.netlify.app/"
                 ),
                 description = "OpenApi documentation for connectverse",
                 title = "OpenApi Specification - Hope",
